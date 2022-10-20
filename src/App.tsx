@@ -11,8 +11,6 @@ import {
   materialCells,
   materialRenderers,
 } from '@jsonforms/material-renderers';
-import RatingControl from './RatingControl';
-import ratingControlTester from './ratingControlTester';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
@@ -52,7 +50,6 @@ const initialData = {
 const renderers = [
   ...materialRenderers,
   //register custom renderers
-  { tester: ratingControlTester, renderer: RatingControl },
 ];
 
 const App = () => {
@@ -67,11 +64,7 @@ const App = () => {
   return (
     <Fragment>
       <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>Welcome to JSON Forms with React</h1>
-          <p className='App-intro'>More Forms. Less Code.</p>
-        </header>
+        <header className='App-header'></header>
       </div>
 
       <Grid

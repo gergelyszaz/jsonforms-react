@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { JsonForms } from '@jsonforms/react';
 import schema from './../tmp/schema.json';
 import uischema from './../tmp/uischema.json';
@@ -7,13 +7,7 @@ import {
   materialRenderers,
 } from '@jsonforms/material-renderers';
 
-const initialData = {
-  name: 'Send email to Adrian',
-  description: 'Confirm if you have passed the subject\nHereby ...',
-  done: true,
-  recurrence: 'Daily',
-  rating: 3,
-};
+const initialData = {};
 
 const renderers = [
   ...materialRenderers,

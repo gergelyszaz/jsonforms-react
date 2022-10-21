@@ -12,7 +12,7 @@ const theme = createTheme({
         root: {
           margin: '0.8em 0',
         },
-      }
+      },
     },
   },
 });

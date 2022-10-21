@@ -13,12 +13,12 @@ const renderers = [
   //register custom renderers
 ];
 
-export const DataEditor = (params: { id: string }) => {
+export const DataEditor = (params: { formId: string, dataId?: string }) => {
   const [data, setData] = useState<any>(initialData);
   const [form, setForm] = useState<FormResponseDTO>();
   const [, setError] = useState<ApiError | null>();
   useEffect(() => {
-    FormService.getForms(params.id)
+    FormService.getForms(params.formId)
       .then((form) => setForm(form))
       .catch((error) => setError(error));
   });

@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { JsonForms } from '@jsonforms/react';
-import schema from './../tmp/schema.json';
-import uischema from './../tmp/uischema.json';
 import {
   materialCells,
   materialRenderers,
 } from '@jsonforms/material-renderers';
+import { ApiError, FormResponseDTO, FormService } from '../gen/api/client';
 
 const initialData = {};
 
@@ -14,17 +13,24 @@ const renderers = [
   //register custom renderers
 ];
 
-export const DataEditor = () => {
+export const DataEditor = (params: { id: string }) => {
   const [data, setData] = useState<any>(initialData);
+  const [form, setForm] = useState<FormResponseDTO>();
+  const [, setError] = useState<ApiError | null>();
+  useEffect(() => {
+    FormService.getForms(params.id)
+      .then((form) => setForm(form))
+      .catch((error) => setError(error));
+  });
 
   return (
     <JsonForms
-      schema={schema}
-      uischema={uischema}
+      schema={form?.schema}
+      uischema={form?.uiSchema}
       data={data}
       renderers={renderers}
       cells={materialCells}
-      onChange={({ errors, data }) => setData(data)}
+      onChange={({ data }) => setData(data)}
     />
   );
 };

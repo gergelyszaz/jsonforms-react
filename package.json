@@ -35,7 +35,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --config video=false",
     "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run",
-    "build:api": "openapi -i https://raw.githubusercontent.com/gergelyszaz/forms-api/main/swagger.json -o src/api/client"
+    "build:api": "openapi -i https://raw.githubusercontent.com/gergelyszaz/forms-api/main/openapi.yml -o src/gen/api/client"
   },
   "eslintConfig": {
     "extends": [

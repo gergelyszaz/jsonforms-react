@@ -64,4 +64,4 @@ build
 yalc.lock
 
 # generated openapi files
-src/services/openapi/
+src/gen/api/client/

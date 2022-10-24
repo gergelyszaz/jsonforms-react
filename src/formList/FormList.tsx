@@ -16,7 +16,7 @@ export function FormList() {
   return (
     <div>
       {items.map((item: ListItemResponseDTO) => (
-        <li>{item.name}</li>
+        <li key={item.id}>{item.name}</li>
       ))}
     </div>
   );

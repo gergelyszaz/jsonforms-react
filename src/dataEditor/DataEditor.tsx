@@ -7,21 +7,22 @@ import {
 import { ApiError, FormResponseDTO, FormService } from '../gen/api/client';
 
 const initialData = {};
+const { getForms } = FormService;
 
 const renderers = [
   ...materialRenderers,
   //register custom renderers
 ];
 
-export const DataEditor = (params: { formId: string, dataId?: string }) => {
+export const DataEditor = (params: { formId: string; dataId?: string }) => {
   const [data, setData] = useState<any>(initialData);
   const [form, setForm] = useState<FormResponseDTO>();
   const [, setError] = useState<ApiError | null>();
   useEffect(() => {
-    FormService.getForms(params.formId)
+    getForms(params.formId)
       .then((form) => setForm(form))
       .catch((error) => setError(error));
-  });
+  }, [params.formId]);
 
   return (
     <JsonForms

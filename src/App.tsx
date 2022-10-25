@@ -1,21 +1,57 @@
-import { Fragment } from 'react';
 import './App.css';
 
-import { Navigation } from './navigation/Navigation';
-import { DataEditor } from './dataEditor/DataEditor';
-import { FormList } from './formList/FormList';
+import { Navbar } from './components/Navigation';
 import { OpenAPI } from './gen/api/client';
+
+import type { RouteObject } from 'react-router-dom';
+import { Outlet, Link, useRoutes } from 'react-router-dom';
+import FormsPage from './pages/FormsPage';
+import { DataEditorPage } from './pages/DataEditorPage';
+import DashboardPage from './pages/DashboardPage';
 
 OpenAPI.BASE = 'https://virtserver.swaggerhub.com/gergelyszaz/Forms/1.0.0';
 
-const App = () => {
-  return (
-    <Fragment>
-      <Navigation />
-      <FormList />
-      <DataEditor formId='3fa85f64-5717-4562-b3fc-2c963f66afa' />
-    </Fragment>
-  );
-};
+export default function App() {
+  let routes: RouteObject[] = [
+    {
+      path: '/',
+      element: <Outlet />,
+      children: [
+        { index: true, element: <DashboardPage /> },
+        {
+          path: '/dashboard',
+          element: <DashboardPage />,
+        },
+        {
+          path: '/forms',
+          element: <Outlet />,
+          children: [
+            { index: true, element: <FormsPage /> },
+            { path: '/forms/:id', element: <DataEditorPage /> },
+          ],
+        },
+        { path: '*', element: <NoMatch /> },
+      ],
+    },
+  ];
 
-export default App;
+  let element = useRoutes(routes);
+
+  return (
+    <>
+      <Navbar />
+      {element}
+    </>
+  );
+}
+
+function NoMatch() {
+  return (
+    <div>
+      <h2>It looks like you're lost...</h2>
+      <p>
+        <Link to='/'>Go to the home page</Link>
+      </p>
+    </div>
+  );
+}

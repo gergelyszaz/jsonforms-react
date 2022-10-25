@@ -27,7 +27,14 @@ export default function App() {
           element: <Outlet />,
           children: [
             { index: true, element: <FormsPage /> },
-            { path: '/forms/:id', element: <DataEditorPage /> },
+            {
+              path: '/forms/data/:dataId',
+              element: <DataEditorPage />,
+            },
+            {
+              path: '/forms/:formId',
+              element: <DataEditorPage />,
+            },
           ],
         },
         { path: '*', element: <NoMatch /> },

@@ -1,12 +1,13 @@
-import { useLoaderData, useNavigation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { DataEditor } from '../components/DataEditor';
 
 export function DataEditorPage() {
-  let { id } = useParams<'id'>();
+  let { formId } = useParams<'formId'>();
+  let { dataId } = useParams<'dataId'>();
   return (
     <>
       <h2>Data Editor</h2>
-      <DataEditor formId={id!} />
+      <DataEditor formId={formId!} dataId={dataId} />
     </>
   );
 }

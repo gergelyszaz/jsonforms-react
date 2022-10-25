@@ -24,6 +24,10 @@ export function FormList() {
             <Link to={item.id!}>
               <Button>Add</Button>
             </Link>
+
+            <Link to={'data/' + item.id!}>
+              <Button>Open</Button>
+            </Link>
           </Stack>
         </div>
       ))}

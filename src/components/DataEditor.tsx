@@ -12,7 +12,6 @@ import {
   FormService,
 } from '../gen/api/client';
 
-const initialData = { content: {} };
 const { getForms } = FormService;
 const { getData } = DataService;
 
@@ -22,9 +21,9 @@ const renderers = [
 ];
 
 export const DataEditor = (params: { formId: string; dataId?: string }) => {
-  const [data, setData] = useState<DataResponseDTO>(initialData);
+  const [data, setData] = useState<DataResponseDTO>();
   const [form, setForm] = useState<FormResponseDTO>();
-  const [, setError] = useState<ApiError | null>();
+  const [error, setError] = useState<ApiError | null>();
   useEffect(() => {
     if (!params.formId) return;
     getForms(params.formId)
@@ -37,7 +36,7 @@ export const DataEditor = (params: { formId: string; dataId?: string }) => {
     getData(params.dataId!)
       .then((data) => setData(data.content!))
       .catch((error) => setError(error));
-    getForms(data.formId!)
+    getForms(data?.formId!)
       .then((form) => setForm(form))
       .catch((error) => setError(error));
   }, [params.dataId]);
@@ -47,7 +46,7 @@ export const DataEditor = (params: { formId: string; dataId?: string }) => {
       <JsonForms
         schema={form?.schema}
         uischema={form?.uiSchema}
-        data={data}
+        data={data ? data : {}}
         renderers={renderers}
         cells={materialCells}
         onChange={({ data }) => setData(data)}

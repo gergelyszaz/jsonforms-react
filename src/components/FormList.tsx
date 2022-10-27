@@ -1,16 +1,14 @@
-import { Button, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ApiError, FormService, ListItemResponseDTO } from '../gen/api/client';
-
-const { listForms } = FormService;
+import { FormService } from '../api';
+import { ListItemResponseDTO } from '../gen/api/client';
+import { DataList } from './DataList';
 
 export function FormList() {
   const [items, setItems] = useState<ListItemResponseDTO[]>([]);
-  const [, setError] = useState<ApiError | null>();
+  const [, setError] = useState<any | null>();
 
   useEffect(() => {
-    listForms()
+    FormService.listForms()
       .then((forms) => setItems(forms.items!))
       .catch((error) => setError(error));
   }, []);
@@ -20,15 +18,7 @@ export function FormList() {
       {items.map((item: ListItemResponseDTO) => (
         <div>
           <h2>{item.name}</h2>
-          <Stack direction='row' spacing={2}>
-            <Link to={item.id!}>
-              <Button>Add</Button>
-            </Link>
-
-            <Link to={'data/' + item.id!}>
-              <Button>Open</Button>
-            </Link>
-          </Stack>
+          <DataList formId={item.id} />
         </div>
       ))}
     </div>

@@ -1,15 +1,12 @@
 import './App.css';
 
 import { Navbar } from './components/Navigation';
-import { OpenAPI } from './gen/api/client';
 
 import type { RouteObject } from 'react-router-dom';
 import { Outlet, Link, useRoutes } from 'react-router-dom';
 import FormsPage from './pages/FormsPage';
 import { DataEditorPage } from './pages/DataEditorPage';
 import DashboardPage from './pages/DashboardPage';
-
-OpenAPI.BASE = 'https://virtserver.swaggerhub.com/gergelyszaz/Forms/1.0.0';
 
 export default function App() {
   let routes: RouteObject[] = [

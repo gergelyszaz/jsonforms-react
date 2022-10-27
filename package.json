@@ -14,6 +14,7 @@
     "@mui/material": "^5.10.10",
     "@mui/styles": "^5.10.10",
     "@mui/x-date-pickers": "^5.0.5",
+    "@openapitools/openapi-generator-cli": "^2.5.2",
     "@types/node": "^18.11.5",
     "@types/react": "^18.0.23",
     "@types/react-dom": "^18.0.7",
@@ -26,19 +27,17 @@
   "devDependencies": {
     "@types/jest": "^28.1.6",
     "cypress": "^6.1.0",
-    "openapi-typescript": "^5.4.1",
-    "openapi-typescript-codegen": "^0.23.0",
     "start-server-and-test": "^1.11.6",
     "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "npm run build:api && react-scripts build",
+    "build:api": "openapi-generator-cli generate -i https://raw.githubusercontent.com/gergelyszaz/forms-api/main/openapi.yml -o src/gen/api/client -g typescript-fetch",
     "test": "react-scripts test --env=jsdom",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --config video=false",
-    "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run",
-    "build:api": "openapi -i https://raw.githubusercontent.com/gergelyszaz/forms-api/main/openapi.yml -o src/gen/api/client"
+    "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run"
   },
   "eslintConfig": {
     "extends": [

@@ -15,9 +15,6 @@ export function FormList() {
   const [items, setItems] = useState<ListItemResponseDTO[]>([]);
   const [, setError] = useState<any | null>();
 
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {};
-
   function handleEdit(e: { stopPropagation: () => void }) {
     e.stopPropagation();
   }
@@ -31,7 +28,7 @@ export function FormList() {
   return (
     <div>
       {items.map((item: ListItemResponseDTO) => (
-        <Accordion onChange={handleChange(item.id)}>
+        <Accordion>
           <AccordionSummary>
             <h2>{item.name}</h2>
             <Button onClick={handleEdit}>

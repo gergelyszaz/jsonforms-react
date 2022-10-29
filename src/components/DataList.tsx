@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 export function DataList(params: { formId: string }) {
   const [items, setItems] = useState<ListItemResponseDTO[]>([]);
-  const [error, setError] = useState<any | null>();
+  const [, setError] = useState<any | null>();
 
   useEffect(() => {
     DataService.listData({

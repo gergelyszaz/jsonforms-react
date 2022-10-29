@@ -1,12 +1,10 @@
-import './App.css';
-
 import { Navbar } from './components/Navigation';
 
 import type { RouteObject } from 'react-router-dom';
 import { Outlet, Link, useRoutes } from 'react-router-dom';
 import FormsPage from './pages/FormsPage';
-import { DataEditorPage } from './pages/DataEditorPage';
 import DashboardPage from './pages/DashboardPage';
+import { Container } from '@mui/material';
 
 export default function App() {
   let routes: RouteObject[] = [
@@ -26,11 +24,11 @@ export default function App() {
             { index: true, element: <FormsPage /> },
             {
               path: '/forms/data/:dataId',
-              element: <DataEditorPage />,
+              element: <FormsPage />,
             },
             {
               path: '/forms/:formId',
-              element: <DataEditorPage />,
+              element: <FormsPage />,
             },
           ],
         },
@@ -44,7 +42,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      {element}
+      <Container maxWidth='lg'>{element}</Container>
     </>
   );
 }

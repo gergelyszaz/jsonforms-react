@@ -35,15 +35,13 @@ export const DataEditor = (params: { formId: string; dataId?: string }) => {
   }, [params.dataId]);
 
   return (
-    <>
-      <JsonForms
-        schema={form?.schema as JsonSchema}
-        uischema={form?.uiSchema as UISchemaElement}
-        data={data ? data : {}}
-        renderers={renderers}
-        cells={materialCells}
-        onChange={({ data }) => setData(data)}
-      />
-    </>
+    <JsonForms
+      schema={form?.schema as JsonSchema}
+      uischema={form?.uiSchema as UISchemaElement}
+      data={data ? data : {}}
+      renderers={renderers}
+      cells={materialCells}
+      onChange={({ data }) => setData(data)}
+    />
   );
 };

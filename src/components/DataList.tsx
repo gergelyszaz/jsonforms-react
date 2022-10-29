@@ -1,8 +1,10 @@
-import { Button } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DataService } from '../api';
 import { ListItemResponseDTO } from '../gen/api/client';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import EditIcon from '@mui/icons-material/Edit';
 
 export function DataList(params: { formId: string }) {
   const [items, setItems] = useState<ListItemResponseDTO[]>([]);
@@ -17,17 +19,20 @@ export function DataList(params: { formId: string }) {
   }, [params.formId]);
 
   return (
-    <div>
+    <Stack direction='row'>
       <Link to={params.formId}>
-        <Button>Add</Button>
+        <Button>
+          <AddCircleIcon sx={{ fontSize: 40 }} />
+        </Button>
       </Link>
+
       {items.map((item: ListItemResponseDTO) => (
-        <div>
-          <Link to={'data/' + item.id!}>
-            <Button>Open</Button>
-          </Link>
-        </div>
+        <Link to={'data/' + item.id!}>
+          <Button size='large'>
+            <EditIcon sx={{ fontSize: 40 }} />
+          </Button>
+        </Link>
       ))}
-    </div>
+    </Stack>
   );
 }

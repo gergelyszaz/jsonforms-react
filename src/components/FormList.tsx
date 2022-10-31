@@ -7,9 +7,9 @@ import {
 import { useEffect, useState } from 'react';
 import { FormService } from '../api';
 import { ListItemResponseDTO } from '../gen/api/client';
-import DataEditorDialog from './DataEditorModal';
 import { DataList } from './DataList';
 import EditIcon from '@mui/icons-material/Edit';
+import { Link } from 'react-router-dom';
 
 export function FormList() {
   const [items, setItems] = useState<ListItemResponseDTO[]>([]);
@@ -31,16 +31,17 @@ export function FormList() {
         <Accordion>
           <AccordionSummary>
             <h2>{item.name}</h2>
-            <Button onClick={handleEdit}>
-              <EditIcon />
-            </Button>
+            <Link to={item.id}>
+              <Button>
+                <EditIcon />
+              </Button>
+            </Link>
           </AccordionSummary>
           <AccordionDetails>
             <DataList formId={item.id} />
           </AccordionDetails>
         </Accordion>
       ))}
-      <DataEditorDialog />
     </div>
   );
 }

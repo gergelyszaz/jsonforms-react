@@ -20,14 +20,14 @@ export function DataList(params: { formId: string }) {
 
   return (
     <Stack direction='row'>
-      <Link to={params.formId}>
+      <Link to={params.formId + '/data/new'}>
         <Button>
           <AddCircleIcon sx={{ fontSize: 40 }} />
         </Button>
       </Link>
 
       {items.map((item: ListItemResponseDTO) => (
-        <Link to={'data/' + item.id!}>
+        <Link to={params.formId + '/data/' + item.id!}>
           <Button size='large'>
             <EditIcon sx={{ fontSize: 40 }} />
           </Button>

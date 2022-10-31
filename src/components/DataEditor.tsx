@@ -26,11 +26,8 @@ export const DataEditor = (params: { formId: string; dataId?: string }) => {
 
   useEffect(() => {
     if (!params.dataId) return;
-    DataService.getData({ id: params.dataId! })
+    DataService.getData({ id: params.dataId })
       .then((data) => setData(data))
-      .catch((error) => setError(error));
-    FormService.getForm({ id: data?.formId! })
-      .then((form) => setForm(form))
       .catch((error) => setError(error));
   }, [params.dataId]);
 

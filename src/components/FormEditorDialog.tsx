@@ -3,28 +3,32 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DataEditor } from './DataEditor';
 import { DataService } from '../api';
+import { useState } from 'react';
+import { CreatedResponseDTO } from '../gen/api/client';
 
-export default function DataEditorDialog() {
-  let { formId } = useParams<'formId'>();
-  let { dataId } = useParams<'dataId'>();
-  let open = formId !== undefined || dataId !== undefined;
+export default function FormEditorDialog(params: {
+  formId: string | undefined;
+}) {
+  const [, setError] = useState<any | null>();
+  let formId = params.formId;
+
   const navigate = useNavigate();
 
   function handleCancel() {
     navigate('/forms');
   }
   function handleSave() {
-    DataService.createData();
     navigate('/forms');
   }
+
   return (
-    <Dialog open={open}>
+    <Dialog open>
       <DialogTitle>Edit data</DialogTitle>
       <DialogContent>
-        <DataEditor formId={formId!} dataId={dataId} />
+        <DataEditor formId={formId!} />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleCancel}>Cancel</Button>

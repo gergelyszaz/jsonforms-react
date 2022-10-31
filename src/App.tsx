@@ -23,12 +23,20 @@ export default function App() {
           children: [
             { index: true, element: <FormsPage /> },
             {
-              path: '/forms/data/:dataId',
-              element: <FormsPage />,
+              path: '/forms/new',
+              element: <FormsPage showFormEditor={true} />,
             },
             {
               path: '/forms/:formId',
-              element: <FormsPage />,
+              element: <FormsPage showFormEditor={true} />,
+            },
+            {
+              path: '/forms/:formId/data/new',
+              element: <FormsPage showDataEditor={true} />,
+            },
+            {
+              path: '/forms/:formId/data/:dataId',
+              element: <FormsPage showDataEditor={true} />,
             },
           ],
         },

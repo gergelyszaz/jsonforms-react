@@ -15,10 +15,6 @@ export function FormList() {
   const [items, setItems] = useState<ListItemResponseDTO[]>([]);
   const [, setError] = useState<any | null>();
 
-  function handleEdit(e: { stopPropagation: () => void }) {
-    e.stopPropagation();
-  }
-
   useEffect(() => {
     FormService.listForms()
       .then((forms) => setItems(forms.items!))

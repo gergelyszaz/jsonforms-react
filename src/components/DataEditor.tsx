@@ -13,10 +13,13 @@ const renderers = [
   //register custom renderers
 ];
 
-export const DataEditor = (params: { formId: string; dataId?: string }) => {
+export default function DataEditor(params: {
+  formId: string;
+  dataId?: string;
+}) {
   const [data, setData] = useState<DataResponseDTO>();
   const [form, setForm] = useState<FormResponseDTO>();
-  const [error, setError] = useState<any | null>();
+  const [, setError] = useState<any | null>();
   useEffect(() => {
     if (!params.formId) return;
     FormService.getForm({ id: params.formId })
@@ -41,4 +44,4 @@ export const DataEditor = (params: { formId: string; dataId?: string }) => {
       onChange={({ data }) => setData(data)}
     />
   );
-};
+}

@@ -4,7 +4,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
-import DataEditor from './DataEditor';
+import FormEditor from './FormEditor';
 
 export default function FormEditorDialog(params: {
   formId: string | undefined;
@@ -24,7 +24,7 @@ export default function FormEditorDialog(params: {
     <Dialog open>
       <DialogTitle>Edit data</DialogTitle>
       <DialogContent>
-        <DataEditor formId={formId!} />
+        <FormEditor formId={formId!} />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleCancel}>Cancel</Button>

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import DataEditor from './DataEditor';
 import { DataService } from '../api';
 import { useState } from 'react';
-import { CreatedResponseDTO } from '../gen/api/client';
+import { CreatedResponseDTO, DataRequestDTO } from '../gen/api/client';
 
 export default function DataEditorDialog(params: {
   formId: string | undefined;
@@ -23,13 +23,29 @@ export default function DataEditorDialog(params: {
     navigate('/forms');
   }
   function handleSave() {
-    DataService.createData()
-      .then(
-        (createdResponse: CreatedResponseDTO) => (dataId = createdResponse.id)
+    let data: DataRequestDTO = { formId: '', content: {} };
+    if (dataId) {
+      updateData(dataId, data);
+    } else {
+      createData(data);
+    }
+  }
+
+  function createData(data: DataRequestDTO) {
+    DataService.createData({ dataRequestDTO: data })
+      .then((createdResponse: CreatedResponseDTO) =>
+        navigate('../' + createdResponse.id)
       )
       .catch((error) => setError(error));
+  }
 
-    navigate('/forms');
+  function updateData(id: string, data: DataRequestDTO) {
+    DataService.updateData({
+      id: id,
+      dataRequestDTO: data,
+    })
+      .then()
+      .catch((error) => setError(error));
   }
 
   return (

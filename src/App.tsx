@@ -23,20 +23,26 @@ export default function App() {
           children: [
             { index: true, element: <FormsPage /> },
             {
-              path: '/forms/new',
+              path: 'new',
               element: <FormsPage showFormEditor={true} />,
             },
             {
-              path: '/forms/:formId',
+              path: ':formId',
               element: <FormsPage showFormEditor={true} />,
             },
             {
-              path: '/forms/:formId/data/new',
-              element: <FormsPage showDataEditor={true} />,
-            },
-            {
-              path: '/forms/:formId/data/:dataId',
-              element: <FormsPage showDataEditor={true} />,
+              path: ':formId/data',
+              element: <Outlet />,
+              children: [
+                {
+                  path: 'new',
+                  element: <FormsPage showDataEditor={true} />,
+                },
+                {
+                  path: ':dataId',
+                  element: <FormsPage showDataEditor={true} />,
+                },
+              ],
             },
           ],
         },

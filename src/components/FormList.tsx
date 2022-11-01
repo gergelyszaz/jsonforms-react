@@ -24,7 +24,7 @@ export function FormList() {
   return (
     <div>
       {items.map((item: ListItemResponseDTO) => (
-        <Accordion>
+        <Accordion key={item.id}>
           <AccordionSummary>
             <h2>{item.name}</h2>
             <Link to={item.id}>

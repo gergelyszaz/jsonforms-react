@@ -27,7 +27,7 @@ export function DataList(params: { formId: string }) {
       </Link>
 
       {items.map((item: ListItemResponseDTO) => (
-        <Link to={params.formId + '/data/' + item.id!}>
+        <Link to={params.formId + '/data/' + item.id!} key={item.id}>
           <Button size='large'>
             <EditIcon sx={{ fontSize: 40 }} />
           </Button>
